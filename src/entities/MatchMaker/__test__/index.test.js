@@ -1,6 +1,7 @@
 import { METRICS, DefaultMaxTeamSize, DefaultMinTeamSize } from "../index.js";
 import MatchMaker from "../index.js";
 import { Player, Match } from "#entities/index.js";
+import { Queue } from "#utils/index.js";
 
 const players = [
   {
@@ -73,6 +74,11 @@ describe("MatchMaker", () => {
     matchMaker.setMetrics(-1);
 
     expect(matchMaker.getMetrics()).toBe(METRICS.WINS);
+  });
+
+  test("Methods - getPlayersQueue", () => {
+    const matchMaker = new MatchMaker();
+    expect(matchMaker.getPlayersQueue()).toBeInstanceOf(Queue);
   });
 
   test("Methods - isValidTeamSize ", () => {

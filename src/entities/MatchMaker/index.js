@@ -16,6 +16,12 @@ export const METRICS = {
 };
 export const DefaultMinTeamSize = 1;
 export const DefaultMaxTeamSize = 10;
+export const GAME_TYPE = {
+  ALL: 1,
+  BEGINNER: 2,
+  ADVANCED: 3,
+  EXPERT: 4,
+};
 
 /*
  * Class for Match Maker ( Will be used as single instance )
@@ -119,17 +125,25 @@ class MatchMaker {
    * @return {number}                   - Number of players currently waiting in the queue to be matches
    */
   getNumOfPlayersInQueue() {
-    return this.#playersInQueue.getSize();
+    return this.getPlayersQueue().getSize();
+  }
+
+  /*
+   * Returns the players queue
+   * @return {Queue}                    - Queue of players waiting to be matches
+   */
+  getPlayersQueue() {
+    return this.#playersInQueue;
   }
 
   /*
    * Get the next n number of players in the queue
    * @return {Player[]}                 - Array of next n players in the queue
    */
-  getPlayers(numOfPlayers) {
+  getPlayers(numOfPlayers, playersQueue) {
     const players = [];
     while (players.length < numOfPlayers) {
-      players.push(this.#playersInQueue.dequeue());
+      players.push(playersQueue.dequeue());
     }
     return players;
   }
@@ -174,20 +188,21 @@ class MatchMaker {
       }
       if (!this.isValidTeamSize(teamSize)) {
         throw Error(
-          invalidTeamSizeErrMsg(this.#minTeamSize, this.#maxTeamSize)
+          invalidTeamSizeErrMsg(this.getMinTeamSize(), this.getMaxTeamSize())
         );
       }
 
+      const playersQueue = this.getPlayersQueue();
       const numOfPlayersNeeded = teamSize * 2;
-      if (numOfPlayersNeeded > this.#playersInQueue.getSize()) {
-        const diff = numOfPlayersNeeded - this.#playersInQueue.getSize();
+      if (numOfPlayersNeeded > playersQueue.getSize()) {
+        const diff = numOfPlayersNeeded - playersQueue.getSize();
         throw Error(notEnoughPlayersErrMsg(diff));
       }
 
-      const selectedPlayers = this.getPlayers(numOfPlayersNeeded);
+      const selectedPlayers = this.getPlayers(numOfPlayersNeeded, playersQueue);
       const [team1, team2] = this.generateTeamPair(selectedPlayers);
       const match = new Match(team1, team2);
-      this.#matches.push(match);
+      this.getAllMatches().push(match);
 
       return match;
     } catch (e) {
@@ -202,15 +217,17 @@ class MatchMaker {
    * @params {Player} newPlayer         - New player to add to the queue waiting to be match made
    */
   enterMatchMaking(newPlayer) {
-    this.#playersInQueue.enqueue(newPlayer);
+    const playersQueue = this.getPlayersQueue();
+    playersQueue.enqueue(newPlayer);
   }
 
   /*
    * Clear the players in queue
    */
   clearQueue() {
-    while (this.#playersInQueue.getSize() > 0) {
-      this.#playersInQueue.dequeue();
+    const playersQueue = this.getPlayersQueue();
+    while (playersQueue.getSize() > 0) {
+      playersQueue.dequeue();
     }
   }
 
