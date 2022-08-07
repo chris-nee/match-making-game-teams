@@ -121,7 +121,11 @@ const inquireMatchMakerMetrics = async () =>
 
             {
               name: "Losses",
-              value: METRICS.L,
+              value: METRICS.LOSSES,
+            },
+            {
+              name: "Total Games",
+              value: METRICS.TOTAL_GAMES,
             },
           ],
         },
