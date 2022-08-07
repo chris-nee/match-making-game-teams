@@ -11,6 +11,11 @@ const DefaultMinTeamSize = 1;
 const DefaultMaxTeamSize = 10;
 
 class MatchMaker {
+  #minTeamSize;
+  #maxTeamSize;
+  #playersInQueue;
+  #matches;
+
   constructor() {
     this.#minTeamSize = DefaultMinTeamSize;
     this.#maxTeamSize = DefaultMaxTeamSize;
@@ -71,6 +76,9 @@ class MatchMaker {
       }
       if (!this.isValidTeamSize(teamSize)) {
         throw Error(invalidTeamSizeErrMsg(this.#minTeamSize, this.#maxTeamSize));
+        throw Error(
+          invalidTeamSizeErrMsg(this.#minTeamSize, this.#maxTeamSize)
+        );
       }
 
       const numOfPlayersNeeded = teamSize * 2;
@@ -82,7 +90,7 @@ class MatchMaker {
       const selectedPlayers = this.getPlayers(numOfPlayersNeeded);
       const [team1, team2] = this.generateTeamPair(selectedPlayers);
       const match = new Match(team1, team2);
-      this.matches.push(match);
+      this.#matches.push(match);
 
       return match;
     } catch (e) {
