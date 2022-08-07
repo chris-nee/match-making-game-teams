@@ -6,20 +6,15 @@ const testPlayer = {
   losses: 12,
 };
 
-const errorTestPlayer = {
-  name: 1,
-  wins: null,
-  losses: "",
-};
-
 describe("Player Class", () => {
   test("Player construction", () => {
     const { name, wins, losses } = testPlayer;
     const player = new Player(name, wins, losses);
     expect(player).toBeInstanceOf(Player);
 
-    const { name: errName, wins: errWins, losses: errLosses } = errorTestPlayer;
-    expect(() => new Player(errName, errWins, errLosses)).toThrow();
+    expect(() => new Player(1, 1, 1)).toThrow();
+    expect(() => new Player("Test", "1", 1)).toThrow();
+    expect(() => new Player("Test", 1, "1")).toThrow();
   });
 
   test("Methods", () => {
