@@ -138,6 +138,25 @@ describe("MatchMaker Singleton", () => {
     });
     expect(matchMaker.getNumOfPlayersInQueue()).toBe(players.length);
   });
+  test("Methods - generateTeamPair", () => {
+    const matchMaker = new MatchMaker();
+    players.forEach(({ name, wins, losses }) => {
+      matchMaker.enterMatchMaking(new Player(name, wins, losses));
+    });
+
+    matchMaker.setMetrics(METRICS.WIN_LOSS_RATIO);
+    const matchByWinLoss = matchMaker.findMatch(1);
+    console.log(matchByWinLoss);
+    expect(matchByWinLoss).toBeInstanceOf(Match);
+
+    matchMaker.setMetrics(METRICS.WINS);
+    const matchByWins = matchMaker.findMatch(1);
+    expect(matchByWins).toBeInstanceOf(Match);
+
+    matchMaker.setMetrics(METRICS.LOSSES);
+    const matchByLosses = matchMaker.findMatch(1);
+    expect(matchByLosses).toBeInstanceOf(Match);
+  });
 
   test("Methods - findMatch", () => {
     const newMinTeamSize = 2;

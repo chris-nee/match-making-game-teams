@@ -78,7 +78,7 @@ class MatchMaker {
    * @return {number}                   - Currrent metrics used by match maker
    */
   getMetrics() {
-    return this.#metrics
+    return this.#metrics;
   }
 
   /*
@@ -135,17 +135,25 @@ class MatchMaker {
 
   /*
    * Split the players into 2 teams of approximately equal strength. Both teams will have approximately
-   * the same win / lose ratio
+   * the same metrics used to determine skill level
    * @return {[Player[], Player[]]}     - Array of length 2 , containing 2 teams of players
    */
   generateTeamPair(players) {
-    function compareWinLoseRatio(playerA, playerB) {
+    const metrics = this.getMetrics();
+
+    function compareFn(playerA, playerB) {
+      if (metrics === METRICS.WINS) {
+        return playerA.getWins() - playerB.getWins();
+      }
+      if (metrics === METRICS.LOSSES) {
+        return playerA.getLosses() - playerB.getLosses();
+      }
       return playerA.getWinLoseRatio() - playerB.getWinLoseRatio();
     }
 
-    players.sort(compareWinLoseRatio);
+    players.sort(compareFn);
     const team1 = players.filter((_, i) => i % 2 === 0); // even
-    const team2 = players.filter((_, i) => i % 2 !== 0);
+    const team2 = players.filter((_, i) => i % 2 !== 0); // odd
     return [team1, team2];
   }
 
