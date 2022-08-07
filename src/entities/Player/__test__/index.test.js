@@ -27,6 +27,7 @@ describe("Player Class", () => {
     expect(player.getWins()).toBe(testPlayer.wins);
     expect(player.getLosses()).toBe(testPlayer.losses);
     expect(player.getWinLoseRatio()).toBe(testPlayer.wins / testPlayer.losses);
+    expect(player.getTotalGames()).toBe(testPlayer.wins + testPlayer.losses);
   });
 
   test("Player static methods", () => {
@@ -49,7 +50,7 @@ describe("Player Class", () => {
         [Player] - ${name}
         [Stats] - Wins: ${wins} , Losses: ${losses} , Wins/Losses Ratio: ${
       wins / losses
-    }
+    } , Total Games: ${wins + losses}
     `);
   });
 });

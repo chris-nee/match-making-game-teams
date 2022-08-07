@@ -77,13 +77,21 @@ class Player {
   }
 
   /*
+   * Calculate and returns win lose ratio of player
+   * @return {number}               - Wins / Lost ratio of player
+   */
+  getTotalGames() {
+    return this.getWins() + this.getLosses();
+  }
+
+  /*
    * Returns a formated string of player details
    * @return {string}               - Formatted string of player details
    */
   getPlayerStats() {
     return `
         [Player] - ${this.getName()}
-        [Stats] - Wins: ${this.getWins()} , Losses: ${this.getLosses()} , Wins/Losses Ratio: ${this.getWinLoseRatio()}
+        [Stats] - Wins: ${this.getWins()} , Losses: ${this.getLosses()} , Wins/Losses Ratio: ${this.getWinLoseRatio()} , Total Games: ${this.getTotalGames()}
     `;
   }
 }
