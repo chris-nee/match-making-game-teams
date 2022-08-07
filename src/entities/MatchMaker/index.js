@@ -115,7 +115,7 @@ class MatchMaker {
    */
   generateTeamPair(players) {
     function compareWinLoseRatio(playerA, playerB) {
-      return playerA.getWinLoseRatio() / playerB.getWinLoseRatio();
+      return playerA.getWinLoseRatio() - playerB.getWinLoseRatio();
     }
 
     players.sort(compareWinLoseRatio);
