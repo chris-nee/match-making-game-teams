@@ -12,7 +12,7 @@ Check if node is present using `node --version` command
 
 **windows**
 
-  Download and install from https://nodejs.org/en/download/
+Download and install from https://nodejs.org/en/download/
 
 **linux**
 
@@ -29,11 +29,12 @@ brew install node
 ```
 
 #### 2. npm >= 8.12.1
+
 Check if npm is present using `npm --version` command
 
 **windows**
 
-  Download and install from https://nodejs.org/en/download/
+Download and install from https://nodejs.org/en/download/
 
 **linux**
 
@@ -64,11 +65,34 @@ npm install
 
 #### Use it as a module
 
-1. Copy source code directly to your own javascript project
-2. NPM publish and install it as module
+```js
+import { MatchMaker, Player } from "@riot-games/game-match-making";
 
+const matchMaker = new MatchMaker();
+const players = [
+  {
+    name: "Chris",
+    wins: 1,
+    losses: 2,
+  },
+  {
+    name: "Tom",
+    wins: 11,
+    losses: 12,
+  },
+];
+players.forEach(({ name, wins, losses }) =>
+  matchMaker.enterMatchMaking(new Player(name, wins, losses))
+);
+
+const match = matchMaker.findMatch(1);
+```
+
+1. Copy source code directly to your own javascript project
+2. NPM publish and install it as module ( not published yet )
 
 #### Run Cli interactive version
+
 Interact with the match making system to test out its capabilities
 
 ```sh
