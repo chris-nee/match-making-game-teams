@@ -83,8 +83,8 @@ describe("MatchMaker Singleton", () => {
   });
 
   test("Methods - setMinMaxTeamSize", () => {
-    expect(() => MatchMaker.setMinMaxTeamSize('', '')).toThrow();
-    expect(() => MatchMaker.setMinMaxTeamSize(-1, 10)).toThrow();
+    expect(() => MatchMaker.setMinMaxTeamSize("", "")).toThrow();
+    expect(() => newMatchMakeInstance.findMatch(100)).toThrow();
     expect(() => MatchMaker.setMinMaxTeamSize(11, 10)).toThrow();
 
     const newMin = 2;
@@ -134,7 +134,7 @@ describe("MatchMaker Singleton", () => {
     expect(newMatchMakeInstance.findMatch("")).toBe(null);
     expect(newMatchMakeInstance.findMatch(0)).toBe(null);
     expect(newMatchMakeInstance.findMatch(2)).toBeInstanceOf(Match);
-    expect(newMatchMakeInstance.findMatch(100)).toBeInstanceOf(Match);
+    expect(newMatchMakeInstance.findMatch(100)).toBe(null);
   });
 
   test("Methods - clearQueue", () => {
