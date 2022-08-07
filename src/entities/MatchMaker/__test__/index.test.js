@@ -1,4 +1,4 @@
-import { DefaultMaxTeamSize, DefaultMinTeamSize } from "../index.js";
+import { METRICS, DefaultMaxTeamSize, DefaultMinTeamSize } from "../index.js";
 import MatchMaker from "../index.js";
 import { Player, Match } from "#entities/index.js";
 
@@ -62,6 +62,17 @@ describe("MatchMaker Singleton", () => {
   test("Construction", () => {
     const matchMaker = new MatchMaker();
     expect(matchMaker).toBeInstanceOf(MatchMaker);
+  });
+
+  test("Methods - Get/Set metrics", () => {
+    const matchMaker = new MatchMaker();
+    expect(matchMaker.getMetrics()).toBe(METRICS.WIN_LOSS_RATIO);
+    matchMaker.setMetrics(METRICS.WINS);
+
+    expect(matchMaker.getMetrics()).toBe(METRICS.WINS);
+    matchMaker.setMetrics(-1);
+
+    expect(matchMaker.getMetrics()).toBe(METRICS.WINS);
   });
 
   test("Methods - isValidTeamSize ", () => {

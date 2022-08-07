@@ -8,6 +8,11 @@ import {
 import { Match } from "#entities/index.js";
 import { Queue } from "#utils/index.js";
 
+export const METRICS = {
+  WINS: 1,
+  LOSSES: 2,
+  WIN_LOSS_RATIO: 3,
+};
 export const DefaultMinTeamSize = 1;
 export const DefaultMaxTeamSize = 10;
 
@@ -18,12 +23,14 @@ export const DefaultMaxTeamSize = 10;
  * @private @property {number} maxTeamSize      - Maximum team size
  * @private @property {Queue}  playersInQueue   - Queue of players
  * @private @property {Match[]}  matches        - Array of matches
+ * @private @property {number}  metrics         - Main metrics we use when decide team skill level
  */
 class MatchMaker {
   #minTeamSize;
   #maxTeamSize;
   #playersInQueue;
   #matches;
+  #metrics;
 
   /*
    * Creates a Match maker
@@ -39,6 +46,7 @@ class MatchMaker {
     this.#maxTeamSize = maxTeamSize;
     this.#playersInQueue = new Queue();
     this.#matches = [];
+    this.#metrics = METRICS.WIN_LOSS_RATIO;
   }
 
   /*
@@ -55,6 +63,22 @@ class MatchMaker {
    */
   getMaxTeamSize() {
     return this.#maxTeamSize;
+  }
+
+  /*
+   * Changes the metrics if it is a valid one
+   */
+  setMetrics(metric) {
+    if (Object.values(METRICS).indexOf(metric) < 0) return;
+    this.#metrics = metric;
+  }
+
+  /*
+   * Get the current metrics value
+   * @return {number}                   - Currrent metrics used by match maker
+   */
+  getMetrics() {
+    return this.#metrics
   }
 
   /*
