@@ -14,12 +14,6 @@ export const METRICS = {
   WIN_LOSS_RATIO: 3,
   TOTAL_GAMES: 4,
 };
-export const GAME_TYPE = {
-  ALL: 1,
-  BEGINNER: 2,
-  ADVANCED: 3,
-  EXPERT: 4,
-};
 export const DefaultMinTeamSize = 1;
 export const DefaultMaxTeamSize = 10;
 
