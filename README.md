@@ -51,13 +51,13 @@ brew install npm
 #### Installation
 
 ```sh
-// clone project ( If you don't have the source file )
+# clone project ( If you don't have the source file )
 git clone git@github.com:chris-nee/match-making-game-teams.git
 
-// change directory to project root
+# change directory to project root
 cd match-making-game-teams # same level as package.json file
 
-// install dependencies
+# install dependencies
 npm install
 ```
 
