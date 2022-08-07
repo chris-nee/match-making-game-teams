@@ -15,7 +15,7 @@ describe("Error Messages for MatchMake class", () => {
     const min = 1,
       max = 10;
 
-    expect(invalidTeamSizeErrMsg()).toBe(
+    expect(invalidTeamSizeErrMsg(min, max)).toBe(
       `Team size must be between ${min} and ${max}`
     );
   });
