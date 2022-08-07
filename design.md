@@ -176,11 +176,11 @@ __Strategy 2 - Use multiple queues for people of different skill levels__
 
 This is not implemented in a single MatchMaker instance, but we can achieve this by setting up multiple match makers. For example,
 
-MatchMakerBeginner -> total games < 500
+MatchMakerBeginner -> players with total games < 500
 
-MatchMakerAdvanced -> total games >= 500 && < 1500
+MatchMakerAdvanced -> players with total games >= 500 && < 1500
 
-MatchMakerExpert -> total games >= 1500
+MatchMakerExpert -> players with total games >= 1500
 
 
 _Improvement over time_
