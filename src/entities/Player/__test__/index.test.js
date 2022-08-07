@@ -46,12 +46,10 @@ describe("Player Class", () => {
     const { name, wins, losses } = testPlayer;
     const player = new Player(name, wins, losses);
     expect(player.getPlayerStats()).toBe(`
-        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-        Player ${name} Stats:
-            - Wins: ${wins}
-            - Losses: ${losses}
-            - Wins/Losses Ratio: ${wins / losses}
-        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        [Player] - ${name}
+        [Stats] - Wins: ${wins} , Losses: ${losses} , Wins/Losses Ratio: ${
+      wins / losses
+    }
     `);
   });
 });
