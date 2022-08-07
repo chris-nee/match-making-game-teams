@@ -40,21 +40,24 @@ describe("Match class", () => {
 
   test("Match method - getMatchDetails()", () => {
     const match = new Match(team1, team2);
+    const t1Stats = match.getTeamStats(team1);
+    const t2Stats = match.getTeamStats(team2);
+
     expect(match.getMatchDetails()).toBe(`
         ==========================
         Match Formed
-        TEAM 1 :
-        ${match
-          .getTeam1()
-          .map((player) => player.getPlayerStats())
-          .join("/n")}
+        ==========================
+        [Team] - 1 
+        [Team Stats] - Total Wins: ${t1Stats.totalWins} , Total Losses: ${
+      t1Stats.totalLosses
+    } , Average Win / Loss Ratio: ${t1Stats.averageWinLossRatio}
+        ${team1.map((player) => player.getPlayerStats()).join("")}
         --------------------------
-
-        TEAM 2 :
-        ${match
-          .getTeam2()
-          .map((player) => player.getPlayerStats())
-          .join("/n")}
+        [Team] - 2 
+        [Team Stats] - Total Wins: ${t2Stats.totalWins} , Total Losses: ${
+      t2Stats.totalLosses
+    } , Average Win / Loss Ratio: ${t2Stats.averageWinLossRatio}
+        ${team2.map((player) => player.getPlayerStats()).join("")}
         ==========================
     `);
   });

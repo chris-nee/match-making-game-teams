@@ -35,11 +35,7 @@ class Match {
     return this.#team2;
   }
 
-  /*
-   * Returns a formatted string of match details
-   * @return {string}               - Formatted string of match details
-   */
-  getMatchDetails() {
+  getTeamStats(team) {
     const reduceStats = (prev, player, _, arr) => {
       const wins = player.getWins();
       const losses = player.getLosses();
@@ -51,16 +47,20 @@ class Match {
       return prev;
     };
 
-    const t1Stats = this.#team1.reduce(reduceStats, {
+    return team.reduce(reduceStats, {
       totalLosses: 0,
       totalWins: 0,
       averageWinLossRatio: 0,
     });
-    const t2Stats = this.#team2.reduce(reduceStats, {
-      totalLosses: 0,
-      totalWins: 0,
-      averageWinLossRatio: 0,
-    });
+  }
+
+  /*
+   * Returns a formatted string of match details
+   * @return {string}               - Formatted string of match details
+   */
+  getMatchDetails() {
+    const t1Stats = this.getTeamStats(this.#team1);
+    const t2Stats = this.getTeamStats(this.#team2);
 
     return `
         ==========================
