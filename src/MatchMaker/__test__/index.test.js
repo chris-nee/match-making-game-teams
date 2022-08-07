@@ -84,7 +84,7 @@ describe("MatchMaker Singleton", () => {
 
   test("Methods - setMinMaxTeamSize", () => {
     expect(() => MatchMaker.setMinMaxTeamSize("", "")).toThrow();
-    expect(() => newMatchMakeInstance.findMatch(100)).toThrow();
+    expect(() => MatchMaker.setMinMaxTeamSize(-1, 10)).toThrow();
     expect(() => MatchMaker.setMinMaxTeamSize(11, 10)).toThrow();
 
     const newMin = 2;
