@@ -34,7 +34,7 @@ class Player {
    * @params {number} wins          - Matches won by player
    * @params {number} losses        - Matches lost by player
    */
-  constructor(name, wins, losses) {
+  constructor(name, wins = 0, losses = 0) {
     if (!Player.validName(name)) throw TypeError("Invalid Name");
     if (!Player.validCount(wins)) throw TypeError("Invalid wins count");
     if (!Player.validCount(losses)) throw TypeError("Invalid losses count");
