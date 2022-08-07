@@ -1,3 +1,3 @@
-import MatchMaker from "#src/MatchMaker/index.js";
+import { MatchMaker, Player, Match } from "#entities/index.js";
 
-export default MatchMaker;
+export { Player, Match, MatchMaker, MatchMaker as default };
