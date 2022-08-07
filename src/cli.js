@@ -152,7 +152,9 @@ async function start() {
         case COMMANDS_VALUE.GET_MATCH: {
           const teamSize = await inquireTeamSize();
           const match = matchMaker.findMatch(teamSize);
-          console.log(match.getMatchDetails());
+          if (match) {
+            console.log(match.getMatchDetails());
+          }
           continue;
         }
 
