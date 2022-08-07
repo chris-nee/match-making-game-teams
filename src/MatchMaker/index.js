@@ -11,48 +11,44 @@ const DefaultMinTeamSize = 1;
 const DefaultMaxTeamSize = 10;
 
 class MatchMaker {
-  static isNum(value) {
-    return +value === value;
-  }
-
   constructor() {
-    this.minTeamSize = DefaultMinTeamSize;
-    this.maxTeamSize = DefaultMaxTeamSize;
-    this.playersInQueue = new Queue();
-    this.matches = [];
+    this.#minTeamSize = DefaultMinTeamSize;
+    this.#maxTeamSize = DefaultMaxTeamSize;
+    this.#playersInQueue = new Queue();
+    this.#matches = [];
   }
 
   getMinTeamSize() {
-    return this.minTeamSize;
+    return this.#minTeamSize;
   }
 
   getMaxTeamSize() {
-    return this.maxTeamSize;
+    return this.#maxTeamSize;
   }
 
   setMinMaxTeamSize(min, max) {
-    if (!isNum(min) || !isNum(max)) throw TypeError(numTypeErrMsg());
+    if (!this.isNum(min) || !this.isNum(max)) throw TypeError(numTypeErrMsg());
     if (min > max) throw Error(invalidTeamSizeRangeErrMsg());
-    this.minTeamSize = min;
-    this.maxTeamSize = max;
+    this.#minTeamSize = min;
+    this.#maxTeamSize = max;
   }
 
   isNum(value) {
-    return MatchMaker.isNum(value);
+    return +value === value;
   }
 
   isValidTeamSize(teamSize) {
-    return this.minTeamSize <= teamSize && teamSize <= this.maxTeamSize;
+    return this.#minTeamSize <= teamSize && teamSize <= this.#maxTeamSize;
   }
 
   getNumOfPlayersInQueue() {
-    return this.playersInQueue.getSize();
+    return this.#playersInQueue.getSize();
   }
 
   getPlayers(numOfPlayers) {
     const players = [];
     while (players.length < numOfPlayers) {
-      players.push(this.playersInQueue.dequeue());
+      players.push(this.#playersInQueue.dequeue());
     }
     return players;
   }
@@ -74,12 +70,12 @@ class MatchMaker {
         throw TypeError(numTypeErrMsg());
       }
       if (!this.isValidTeamSize(teamSize)) {
-        throw Error(invalidTeamSizeErrMsg(this.minTeamSize, this.maxTeamSize));
+        throw Error(invalidTeamSizeErrMsg(this.#minTeamSize, this.#maxTeamSize));
       }
 
       const numOfPlayersNeeded = teamSize * 2;
-      if (numOfPlayersNeeded > this.playersInQueue.getSize()) {
-        const diff = numOfPlayersNeeded - this.playersInQueue.getSize();
+      if (numOfPlayersNeeded > this.#playersInQueue.getSize()) {
+        const diff = numOfPlayersNeeded - this.#playersInQueue.getSize();
         throw Error(notEnoughPlayersErrMsg(diff));
       }
 
@@ -96,7 +92,7 @@ class MatchMaker {
   }
 
   enterMatchMaking(newPlayer) {
-    this.playersInQueue.enqueue(newPlayer);
+    this.#playersInQueue.enqueue(newPlayer);
   }
 }
 
