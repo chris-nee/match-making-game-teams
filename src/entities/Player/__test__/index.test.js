@@ -6,14 +6,23 @@ const testPlayer = {
   losses: 12,
 };
 
+const errorTestPlayer = {
+  name: 1,
+  wins: null,
+  losses: "",
+};
+
 describe("Player Class", () => {
   test("Player construction", () => {
     const { name, wins, losses } = testPlayer;
     const player = new Player(name, wins, losses);
     expect(player).toBeInstanceOf(Player);
+
+    const { name: errName, wins: errWins, losses: errLosses } = errorTestPlayer;
+    expect(() => new Player(errName, errWins, errLosses)).toThrow();
   });
 
-  test("Player Methods", () => {
+  test("Methods", () => {
     const { name, wins, losses } = testPlayer;
     const player = new Player(name, wins, losses);
     expect(player.getName()).toBe(testPlayer.name);
@@ -33,5 +42,18 @@ describe("Player Class", () => {
     expect(Player.validCount(0)).toBe(true);
     expect(Player.validCount(2)).toBe(true);
     expect(Player.validCount("2")).toBe(false);
+  });
+
+  test("Methods - getPlayerStats", () => {
+    const { name, wins, losses } = testPlayer;
+    const player = new Player(name, wins, losses);
+    expect(player.getPlayerStats()).toBe(`
+        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        Player ${name} Stats:
+            - Wins: ${wins}
+            - Losses: ${losses}
+            - Wins/Losses Ratio: ${wins / losses}
+        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    `);
   });
 });
