@@ -50,7 +50,7 @@ brew install npm
 
 #### Installation
 
-```console
+```sh
 // clone project ( If you don't have the source file )
 git clone git@github.com:chris-nee/match-making-game-teams.git
 
