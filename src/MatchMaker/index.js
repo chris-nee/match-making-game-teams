@@ -78,14 +78,12 @@ class MatchMaker {
       }
 
       const numOfPlayersNeeded = teamSize * 2;
-      console.log(this.playersInQueue.getSize());
       if (numOfPlayersNeeded > this.playersInQueue.getSize()) {
         const diff = numOfPlayersNeeded - this.playersInQueue.getSize();
         throw Error(notEnoughPlayersErrMsg(diff));
       }
 
       const selectedPlayers = this.getPlayers(numOfPlayersNeeded);
-      console.log(this.playersInQueue.getSize());
       const [team1, team2] = this.generateTeamPair(selectedPlayers);
       const match = new Match(team1, team2);
       this.matches.push(match);
