@@ -1,5 +1,7 @@
 import Match from "../index.js";
+import { Player } from "#entities/index.js";
 
+const genPlayer = ({ name, wins, losses }) => new Player(name, wins, losses);
 const team1 = [
   { name: "Chris", wins: 2, losses: 1 },
   {
@@ -7,7 +9,8 @@ const team1 = [
     wins: 4,
     losses: 5,
   },
-];
+].map(genPlayer);
+
 const team2 = [
   { name: "Tom", wins: 2, losses: 1 },
   {
@@ -15,7 +18,7 @@ const team2 = [
     wins: 4,
     losses: 5,
   },
-];
+].map(genPlayer);
 
 describe("Match class", () => {
   test("Match creation", () => {
@@ -33,5 +36,26 @@ describe("Match class", () => {
     const match = new Match(team1, team2);
     expect(match.getTeam2()).toBe(team2);
     expect(match.getTeam2()).not.toBe(team1);
+  });
+
+  test("Match method - getMatchDetails()", () => {
+    const match = new Match(team1, team2);
+    expect(match.getMatchDetails()).toBe(`
+        ==========================
+        Match Formed
+        TEAM 1 :
+        ${match
+          .getTeam1()
+          .map((player) => player.getPlayerStats())
+          .join("/n")}
+        --------------------------
+
+        TEAM 2 :
+        ${match
+          .getTeam2()
+          .map((player) => player.getPlayerStats())
+          .join("/n")}
+        ==========================
+    `);
   });
 });
