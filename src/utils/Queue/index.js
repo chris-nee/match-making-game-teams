@@ -50,6 +50,7 @@ class Queue {
     }
 
     const toReturn = this.#storage[this.#firstIndex];
+    delete this.#storage[this.#firstIndex];
     this.#firstIndex += 1;
     return toReturn;
   }
