@@ -2,18 +2,20 @@ import inquirer from "inquirer";
 import fs from "fs";
 import path from "path";
 
-import { MatchMaker, Player } from "./index.js";
+import { METRICS, MatchMaker, Player } from "./index.js";
 
 const COMMANDS_TITLE = {
   ADD_NEW_PLAYER: "Add new player",
   GET_MATCH: "Get Match",
   MASS_ADD_NEW_PLAYERS: "Mass add new players",
+  CONFIGURE_METRICS: "Configure match maker metrics",
 };
 
 const COMMANDS_VALUE = {
   ADD_NEW_PLAYER: 1,
   GET_MATCH: 2,
   MASS_ADD_NEW_PLAYERS: 3,
+  CONFIGURE_METRICS: 4,
 };
 
 const inquireCommand = async () =>
@@ -36,6 +38,10 @@ const inquireCommand = async () =>
             {
               name: COMMANDS_TITLE.MASS_ADD_NEW_PLAYERS,
               value: COMMANDS_VALUE.MASS_ADD_NEW_PLAYERS,
+            },
+            {
+              name: COMMANDS_TITLE.CONFIGURE_METRICS,
+              value: COMMANDS_VALUE.CONFIGURE_METRICS,
             },
           ],
         },
@@ -82,12 +88,45 @@ const inquireMassAddNewPlayer = async () =>
   new Promise((res, rej) => {
     inquirer
       .prompt([
-        { type: "input", name: "fileLoc", message: "user data JSON file ( e.g. ./data/file.json )" },
+        {
+          type: "input",
+          name: "fileLoc",
+          message: "user data JSON file ( e.g. ./data/file.json )",
+        },
       ])
       .then(({ fileLoc }) => {
         const fileData = fs.readFileSync(path.resolve("./", fileLoc));
         res(JSON.parse(fileData));
       })
+      .catch(rej);
+  });
+
+const inquireMatchMakerMetrics = async () =>
+  new Promise((res, rej) => {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "metrics",
+          message: "What metrics should the match maker sort by ?",
+          choices: [
+            {
+              name: "Win / Loss Ratio",
+              value: METRICS.WIN_LOSS_RATIO,
+            },
+            {
+              name: "Wins",
+              value: METRICS.WINS,
+            },
+
+            {
+              name: "Losses",
+              value: METRICS.L,
+            },
+          ],
+        },
+      ])
+      .then(({ metrics }) => res(metrics))
       .catch(rej);
   });
 
@@ -127,6 +166,12 @@ async function start() {
               numOfPlayersAfter - numOfPlayersBefore
             } players into the system`
           );
+          continue;
+        }
+        case COMMANDS_VALUE.CONFIGURE_METRICS: {
+          const metric = await inquireMatchMakerMetrics();
+          matchMaker.setMetrics(metric);
+          console.log("Metrics configure to ", metric);
           continue;
         }
       }
