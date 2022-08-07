@@ -66,14 +66,14 @@ class Match {
         ==========================
         Match Formed
         ==========================
-        TEAM 1 :
-        Total Wins: ${t1Stats.totalWins} , Total Losses: ${
+        [Team] - 1 
+        [Team Stats] - Total Wins: ${t1Stats.totalWins} , Total Losses: ${
       t1Stats.totalLosses
     } , Average Win / Loss Ratio: ${t1Stats.averageWinLossRatio}
         ${this.#team1.map((player) => player.getPlayerStats()).join("")}
         --------------------------
-        TEAM 2 :
-        Total Wins: ${t2Stats.totalWins} , Total Losses: ${
+        [Team] - 2 
+        [Team Stats] - Total Wins: ${t2Stats.totalWins} , Total Losses: ${
       t2Stats.totalLosses
     } , Average Win / Loss Ratio: ${t2Stats.averageWinLossRatio}
         ${this.#team2.map((player) => player.getPlayerStats()).join("")}

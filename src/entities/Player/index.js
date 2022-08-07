@@ -82,10 +82,8 @@ class Player {
    */
   getPlayerStats() {
     return `
-        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-        Player ${this.getName()} Stats:
-        Wins: ${this.getWins()} , Losses: ${this.getLosses()} , Wins/Losses Ratio: ${this.getWinLoseRatio()}
-        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        [Player] - ${this.getName()}
+        [Stats] - Wins: ${this.getWins()} , Losses: ${this.getLosses()} , Wins/Losses Ratio: ${this.getWinLoseRatio()}
     `;
   }
 }
