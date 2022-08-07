@@ -1,3 +1,3 @@
-import { MatchMaker, Player, Match } from "#entities/index.js";
+import { METRICS, MatchMaker, Player, Match } from "#entities/index.js";
 
-export { Player, Match, MatchMaker, MatchMaker as default };
+export { METRICS, Player, Match, MatchMaker, MatchMaker as default };
