@@ -172,9 +172,15 @@ __Strategy 1 - First come first serve__
     
     Odd players in sort order goes to team 1, even players in sort order goes to team 2.
 
+__Strategy 2 - Use multiple queues for people of different skill levels__
 
+This is not implemented in a single MatchMaker instance, but we can achieve this by setting up multiple match makers. For example,
 
+MatchMakerBeginner -> total games < 500
 
+MatchMakerAdvanced -> total games >= 500 && < 1500
+
+MatchMakerExpert -> total games >= 1500
 
 
 _Improvement over time_
