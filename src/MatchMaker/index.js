@@ -19,7 +19,7 @@ export const DefaultMaxTeamSize = 10;
  * @private @property {Queue}  playersInQueue   - Queue of players
  * @private @property {Match[]}  matches        - Array of matches
  */
-class MatchMaker {
+export class MatchMaker {
   #minTeamSize;
   #maxTeamSize;
   #playersInQueue;
