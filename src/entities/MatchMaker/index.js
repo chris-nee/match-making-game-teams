@@ -19,7 +19,7 @@ export const DefaultMaxTeamSize = 10;
  * @private @property {Queue}  playersInQueue   - Queue of players
  * @private @property {Match[]}  matches        - Array of matches
  */
-export class MatchMaker {
+class MatchMaker {
   #minTeamSize;
   #maxTeamSize;
   #playersInQueue;
@@ -63,7 +63,7 @@ export class MatchMaker {
    * @params {number} max               - Maximum team size
    */
   setMinMaxTeamSize(min, max) {
-    if (!this.isNum(min) || !this.isNum(max)) throw TypeError(numTypeErrMsg());
+    if (!MatchMaker.isNum(min) || !MatchMaker.isNum(max)) throw TypeError(numTypeErrMsg());
     if (min <= 0) throw Error(invalidMinTeamSizeErrMsg());
     if (min > max) throw Error(invalidTeamSizeRangeErrMsg());
     this.#minTeamSize = min;
@@ -75,7 +75,7 @@ export class MatchMaker {
    * @params {number} value             - Value to check if is a valid number
    * @return {bool}                     - Boolean value for whether value is a valid number
    */
-  isNum(value) {
+  static isNum(value) {
     return +value === value;
   }
 
@@ -132,7 +132,7 @@ export class MatchMaker {
    */
   findMatch(teamSize) {
     try {
-      if (!this.isNum(teamSize)) {
+      if (!MatchMaker.isNum(teamSize)) {
         throw TypeError(numTypeErrMsg());
       }
       if (!this.isValidTeamSize(teamSize)) {
@@ -178,5 +178,4 @@ export class MatchMaker {
   }
 }
 
-/* Single Instance */
-export default new MatchMaker();
+export default MatchMaker;

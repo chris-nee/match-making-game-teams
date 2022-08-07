@@ -1,12 +1,13 @@
 import DataJson from "./data.json";
 import { Player } from "#entities/index.js";
-import MatchMaker from "#src/MatchMaker/index.js";
+import { MatchMaker } from "#entities/index.js";
 
 describe("Match making process", () => {
   test("Match making", () => {
+    const matchMaker = new MatchMaker();
     DataJson.forEach((playerData) => {
       const { name, wins, losses } = playerData;
-      MatchMaker.enterMatchMaking(new Player(name, wins, losses));
+      matchMaker.enterMatchMaking(new Player(name, wins, losses));
     });
 
     function randomNumInRange(min, max) {
@@ -14,7 +15,7 @@ describe("Match making process", () => {
       return Math.floor(range + min);
     }
 
-    const match = MatchMaker.findMatch(randomNumInRange(3, 5));
+    const match = matchMaker.findMatch(randomNumInRange(3, 5));
     expect(match).toBeTruthy();
   });
 });
