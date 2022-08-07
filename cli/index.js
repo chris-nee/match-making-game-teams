@@ -2,7 +2,7 @@ import inquirer from "inquirer";
 import fs from "fs";
 import path from "path";
 
-import { METRICS, MatchMaker, Player } from "./index.js";
+import { METRICS, MatchMaker, Player } from "#src/index.js";
 
 const COMMANDS_TITLE = {
   ADD_NEW_PLAYER: "Add new player",
