@@ -35,6 +35,10 @@ class Match {
     return this.#team2;
   }
 
+  /*
+   * Returns the collective team stats
+   * @return {Object}               - Collection results of team
+   */
   getTeamStats(team) {
     const reduceStats = (prev, player, _, arr) => {
       const wins = player.getWins();
