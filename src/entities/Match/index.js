@@ -44,11 +44,11 @@ class Match {
         ==========================
         Match Formed
         TEAM 1 :
-        ${this.#team1.map((player) => player.getPlayerStats()).join("/n")}
+        ${this.#team1.map((player) => player.getPlayerStats()).join("")}
         --------------------------
 
         TEAM 2 :
-        ${this.#team2.map((player) => player.getPlayerStats()).join("/n")}
+        ${this.#team2.map((player) => player.getPlayerStats()).join("")}
         ==========================
     `;
   }
