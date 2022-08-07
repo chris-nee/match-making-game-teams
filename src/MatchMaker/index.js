@@ -11,27 +11,57 @@ import { Queue } from "#utils/index.js";
 const DefaultMinTeamSize = 1;
 const DefaultMaxTeamSize = 10;
 
+/*
+ * Class for Match Maker ( Will be used as single instance )
+ *
+ * @private @property {number} minTeamSize      - Minimum team size
+ * @private @property {number} maxTeamSize      - Maximum team size
+ * @private @property {Queue}  playersInQueue   - Queue of players
+ * @private @property {Match[]}  matches        - Array of matches
+ */
 class MatchMaker {
   #minTeamSize;
   #maxTeamSize;
   #playersInQueue;
   #matches;
 
-  constructor() {
-    this.#minTeamSize = DefaultMinTeamSize;
-    this.#maxTeamSize = DefaultMaxTeamSize;
+  /*
+   * Creates a Match maker
+   *
+   * @params {number} minTeamSize       - Minimum team size
+   * @params {number} maxTeamSize       - Maximum team size
+   */
+  constructor(
+    minTeamSize = DefaultMinTeamSize,
+    maxTeamSize = DefaultMaxTeamSize
+  ) {
+    this.#minTeamSize = minTeamSize;
+    this.#maxTeamSize = maxTeamSize;
     this.#playersInQueue = new Queue();
     this.#matches = [];
   }
 
+  /*
+   * Returns the minimum team size
+   * @return {number}                   - Minimum team size
+   */
   getMinTeamSize() {
     return this.#minTeamSize;
   }
 
+  /*
+   * Returns the maximum team size
+   * @return {number}                   - Maximum team size
+   */
   getMaxTeamSize() {
     return this.#maxTeamSize;
   }
 
+  /*
+   * Updates the minimum and maximum team size
+   * @params {number} min               - Minimum team size
+   * @params {number} max               - Maximum team size
+   */
   setMinMaxTeamSize(min, max) {
     if (!this.isNum(min) || !this.isNum(max)) throw TypeError(numTypeErrMsg());
     if (min <= 0) throw Error(invalidMinTeamSizeErrMsg());
@@ -40,18 +70,36 @@ class MatchMaker {
     this.#maxTeamSize = max;
   }
 
+  /*
+   * Checks if the value input is a number
+   * @params {number} value             - Value to check if is a valid number
+   * @return {bool}                     - Boolean value for whether value is a valid number
+   */
   isNum(value) {
     return +value === value;
   }
 
+  /*
+   * Checks if the team size input is within range of minimum and maximum team size
+   * @params {number} teamSize          - Team size value to check if it falls within the valid range
+   * @return {bool}                     - Boolean value for whether value is within valid range
+   */
   isValidTeamSize(teamSize) {
     return this.#minTeamSize <= teamSize && teamSize <= this.#maxTeamSize;
   }
 
+  /*
+   * Returns the number of players currently in queue
+   * @return {number}                   - Number of players currently waiting in the queue to be matches
+   */
   getNumOfPlayersInQueue() {
     return this.#playersInQueue.getSize();
   }
 
+  /*
+   * Get the next n number of players in the queue
+   * @return {Player[]}                 - Array of next n players in the queue
+   */
   getPlayers(numOfPlayers) {
     const players = [];
     while (players.length < numOfPlayers) {
@@ -60,6 +108,11 @@ class MatchMaker {
     return players;
   }
 
+  /*
+   * Split the players into 2 teams of approximately equal strength. Both teams will have approximately
+   * the same win / lose ratio
+   * @return {[Player[], Player[]]}     - Array of length 2 , containing 2 teams of players
+   */
   generateTeamPair(players) {
     function compareWinLoseRatio(playerA, playerB) {
       return playerA.getWinLoseRatio() / playerB.getWinLoseRatio();
@@ -71,6 +124,12 @@ class MatchMaker {
     return [team1, team2];
   }
 
+  /*
+   * Generate a match between 2 teams of players based on the available players in queue
+   *
+   * @params {number} teamSize          - Team size for match
+   * @return {Match} match              - Match between 2 teams
+   */
   findMatch(teamSize) {
     try {
       if (!this.isNum(teamSize)) {
@@ -100,9 +159,15 @@ class MatchMaker {
     }
   }
 
+  /*
+   * Queue a new player into waiting queue
+   *
+   * @params {Player} newPlayer         - New player to add to the queue waiting to be match made
+   */
   enterMatchMaking(newPlayer) {
     this.#playersInQueue.enqueue(newPlayer);
   }
 }
 
+/* Single Instance */
 export default new MatchMaker();
