@@ -8,8 +8,8 @@ import {
 import { Match } from "#entities/index.js";
 import { Queue } from "#utils/index.js";
 
-const DefaultMinTeamSize = 1;
-const DefaultMaxTeamSize = 10;
+export const DefaultMinTeamSize = 1;
+export const DefaultMaxTeamSize = 10;
 
 /*
  * Class for Match Maker ( Will be used as single instance )
