@@ -12,6 +12,7 @@ export const METRICS = {
   WINS: 1,
   LOSSES: 2,
   WIN_LOSS_RATIO: 3,
+  TOTAL_GAMES: 4,
 };
 export const DefaultMinTeamSize = 1;
 export const DefaultMaxTeamSize = 10;
@@ -147,6 +148,9 @@ class MatchMaker {
       }
       if (metrics === METRICS.LOSSES) {
         return playerA.getLosses() - playerB.getLosses();
+      }
+      if (metrics === METRICS.TOTAL_GAMES) {
+        return playerA.getTotalGames() - playerB.getTotalGames();
       }
       return playerA.getWinLoseRatio() - playerB.getWinLoseRatio();
     }

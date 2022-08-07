@@ -156,6 +156,10 @@ describe("MatchMaker", () => {
     matchMaker.setMetrics(METRICS.LOSSES);
     const matchByLosses = matchMaker.findMatch(1);
     expect(matchByLosses).toBeInstanceOf(Match);
+
+    matchMaker.setMetrics(METRICS.TOTAL_GAMES);
+    const matchByTotalGames = matchMaker.findMatch(1);
+    expect(matchByTotalGames).toBeInstanceOf(Match);
   });
 
   test("Methods - findMatch", () => {
