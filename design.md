@@ -10,6 +10,11 @@ The teams can be 3v3, 4v4, 5v5....
 All players enter the game as solo participants.
 
 
+## Assupmtions
+
+- All players added along the way are unique, match maker will not check if there are duplicated players
+
+
 ## Test Data
 
 A json file ( `src/__test__/data.json` ) containing data of 200 players is provided as sample data. This can be used for test or further extended ( but do not remove any properties )
