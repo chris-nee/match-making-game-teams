@@ -12,6 +12,9 @@ describe("Player Class", () => {
     const player = new Player(name, wins, losses);
     expect(player).toBeInstanceOf(Player);
 
+    const playerWithNoWinLosses = new Player(name);
+    expect(playerWithNoWinLosses).toBeInstanceOf(Player);
+
     expect(() => new Player(1, 1, 1)).toThrow();
     expect(() => new Player("Test", "1", 1)).toThrow();
     expect(() => new Player("Test", 1, "1")).toThrow();
