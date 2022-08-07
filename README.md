@@ -1,47 +1,47 @@
-# Matchmaking System for game
+## Matchmaking System for game
 
-A match making module written in javascript and can be run across multiple systems.
+A match making module written in javascript ES modules format.
 
 ## Quick Start
 
-#### Requirements
+### Requirements
 
-**NodeJs >= 16**
+#### 1. NodeJs >= 16
+
 Check if node is present using `node --version` command
 
-- windows
+**windows**
+
   Download and install from https://nodejs.org/en/download/
 
-- linux
+**linux**
 
 ```sh
-( if not installed )
-// linux
 sudo apt install nodejs
 
 ```
 
-- macos
+**macos**
 
 ```sh
-// macos
 brew install node
 
 ```
 
-**npm >= 8.12.1**
+#### 2. npm >= 8.12.1
 Check if npm is present using `npm --version` command
 
-- windows
+**windows**
+
   Download and install from https://nodejs.org/en/download/
 
-- linux
+**linux**
 
 ```sh
 sudo apt install npm
 ```
 
-- macos
+**macos**
 
 ```sh
 brew install npm
@@ -49,7 +49,7 @@ brew install npm
 
 #### Installation
 
-```sh
+```console
 // clone project ( If you don't have the source file )
 git clone git@github.com:chris-nee/match-making-game-teams.git
 
@@ -72,5 +72,5 @@ npm install
 Interact with the match making system to test out its capabilities
 
 ```sh
-node src/cli.js
+npm run start-interactive
 ```
