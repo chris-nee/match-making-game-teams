@@ -82,7 +82,7 @@ const inquireMassAddNewPlayer = async () =>
   new Promise((res, rej) => {
     inquirer
       .prompt([
-        { type: "input", name: "fileLoc", message: "user data JSON file" },
+        { type: "input", name: "fileLoc", message: "user data JSON file ( e.g. ./data/file.json )" },
       ])
       .then(({ fileLoc }) => {
         const fileData = fs.readFileSync(path.resolve("./", fileLoc));
