@@ -50,13 +50,17 @@ describe("Match class", () => {
         [Team] - 1 
         [Team Stats] - Total Wins: ${t1Stats.totalWins} , Total Losses: ${
       t1Stats.totalLosses
-    } , Average Win / Loss Ratio: ${t1Stats.averageWinLossRatio}
+    } , Average Win / Loss Ratio: ${
+      t1Stats.averageWinLossRatio
+    } , Total Games: ${t1Stats.totalGames}
         ${team1.map((player) => player.getPlayerStats()).join("")}
         --------------------------
         [Team] - 2 
         [Team Stats] - Total Wins: ${t2Stats.totalWins} , Total Losses: ${
       t2Stats.totalLosses
-    } , Average Win / Loss Ratio: ${t2Stats.averageWinLossRatio}
+    } , Average Win / Loss Ratio: ${
+      t2Stats.averageWinLossRatio
+    } , Total Games: ${t2Stats.totalGames}
         ${team2.map((player) => player.getPlayerStats()).join("")}
         ==========================
     `);

@@ -48,6 +48,7 @@ class Match {
       prev.totalWins += wins;
       prev.totalLosses += losses;
       prev.averageWinLossRatio += winLossRatio / arr.length;
+      prev.totalGames += wins + losses;
       return prev;
     };
 
@@ -55,6 +56,7 @@ class Match {
       totalLosses: 0,
       totalWins: 0,
       averageWinLossRatio: 0,
+      totalGames: 0,
     });
   }
 
@@ -73,13 +75,17 @@ class Match {
         [Team] - 1 
         [Team Stats] - Total Wins: ${t1Stats.totalWins} , Total Losses: ${
       t1Stats.totalLosses
-    } , Average Win / Loss Ratio: ${t1Stats.averageWinLossRatio}
+    } , Average Win / Loss Ratio: ${
+      t1Stats.averageWinLossRatio
+    } , Total Games: ${t1Stats.totalGames}
         ${this.#team1.map((player) => player.getPlayerStats()).join("")}
         --------------------------
         [Team] - 2 
         [Team Stats] - Total Wins: ${t2Stats.totalWins} , Total Losses: ${
       t2Stats.totalLosses
-    } , Average Win / Loss Ratio: ${t2Stats.averageWinLossRatio}
+    } , Average Win / Loss Ratio: ${
+      t2Stats.averageWinLossRatio
+    } , Total Games: ${t2Stats.totalGames}
         ${this.#team2.map((player) => player.getPlayerStats()).join("")}
         ==========================
     `;
