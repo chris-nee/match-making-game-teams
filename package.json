@@ -1,0 +1,29 @@
+{
+  "name": "@riot-games/game-match-making",
+  "version": "0.0.1",
+  "description": "Match making tool for game",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/index.js",
+    "start-interactive": "node src/cli.js"
+  },
+  "imports": {
+    "#src/*": "./src/*",
+    "#entities/*": "./src/entities/*",
+    "#utils/*": "./src/utils/*"
+  },
+  "type": "module",
+  "author": "Chris Ling",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^28.1.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^#src(.*)$": "<rootDir>/src$1",
+      "^#entities(.*)$": "<rootDir>/src/entities$1",
+      "^#utils(.*)$": "<rootDir>/src/utils$1"
+    }
+  }
+}
