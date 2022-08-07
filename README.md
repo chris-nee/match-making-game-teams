@@ -66,8 +66,9 @@ npm install
 #### Use it as a module
 
 ```js
-import { MatchMaker, Player } from "@riot-games/game-match-making";
+import { MatchMaker, Player, METRICS } from "@riot-games/game-match-making";
 
+// Create a match maker instance
 const matchMaker = new MatchMaker();
 const players = [
   {
@@ -81,11 +82,24 @@ const players = [
     losses: 12,
   },
 ];
+
+// add players to the match maker queue
 players.forEach(({ name, wins, losses }) =>
   matchMaker.enterMatchMaking(new Player(name, wins, losses))
 );
 
-const match = matchMaker.findMatch(1);
+// Generate the matches, based on team size desired
+const teamSize = 1
+const match = matchMaker.findMatch(teamSize);
+
+// Change the minimum and maximum team size
+const minTeamSize = 2, maxTeamSize = 10;
+matchMaker.setMinMaxTeamSize(minTeamSize, maxTeamSize)
+
+// Change match making strategies based on metrics
+matchMaker.setMetrics(METRIC.WIN_LOSS_RATIO)
+matchMaker.setMetrics(METRIC.WINs)
+matchMaker.setMetrics(METRIC.LOSSES)
 ```
 
 1. Copy source code directly to your own javascript project
@@ -159,4 +173,12 @@ Match Formed
 
 ==========================
 
+```
+
+### Tests
+
+```
+npm test
+
+// coverage report
 ```
