@@ -167,6 +167,15 @@ export class MatchMaker {
   enterMatchMaking(newPlayer) {
     this.#playersInQueue.enqueue(newPlayer);
   }
+
+  /*
+   * Clear the players in queue
+   */
+  clearQueue() {
+    while (this.#playersInQueue.getSize() > 0) {
+      this.#playersInQueue.dequeue();
+    }
+  }
 }
 
 /* Single Instance */
