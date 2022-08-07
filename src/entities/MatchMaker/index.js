@@ -63,7 +63,8 @@ class MatchMaker {
    * @params {number} max               - Maximum team size
    */
   setMinMaxTeamSize(min, max) {
-    if (!MatchMaker.isNum(min) || !MatchMaker.isNum(max)) throw TypeError(numTypeErrMsg());
+    if (!MatchMaker.isNum(min) || !MatchMaker.isNum(max))
+      throw TypeError(numTypeErrMsg());
     if (min <= 0) throw Error(invalidMinTeamSizeErrMsg());
     if (min > max) throw Error(invalidTeamSizeRangeErrMsg());
     this.#minTeamSize = min;
@@ -175,6 +176,14 @@ class MatchMaker {
     while (this.#playersInQueue.getSize() > 0) {
       this.#playersInQueue.dequeue();
     }
+  }
+
+  /*
+   * Get all matches so far
+   * @return {Match[]}          - All the matches created so far
+   */
+  getAllMatches() {
+    return this.#matches;
   }
 }
 

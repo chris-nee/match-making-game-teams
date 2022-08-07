@@ -108,6 +108,15 @@ describe("MatchMaker Singleton", () => {
     expect(matchMaker.isValidTeamSize(8)).toBe(true);
   });
 
+  test("Methods - getAllMatches", () => {
+    const matchMaker = new MatchMaker();
+    players.forEach(({ name, wins, losses }) => {
+      matchMaker.enterMatchMaking(new Player(name, wins, losses));
+    });
+    const match = matchMaker.findMatch(3);
+    expect(matchMaker.getAllMatches()).toEqual([match]);
+  });
+
   test("Methods - enterMatchMaking", () => {
     const matchMaker = new MatchMaker();
     expect(matchMaker.getNumOfPlayersInQueue()).toBe(0);
