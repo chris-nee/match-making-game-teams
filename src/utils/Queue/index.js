@@ -8,9 +8,9 @@
  * - Enqueue O(1) , add new to back of queue
  * - Dequeue O(1) , pop out from the front of queu
  *
- *   @property {Object} storage     - map for storing index to value
- *   @property {number} firstIndex  - index holding the next value to dequeue
- *   @property {number} lastIndex   - index to add the next incoming value
+ *   @private @property {Object} storage     - map for storing index to value
+ *   @private @property {number} firstIndex  - index holding the next value to dequeue
+ *   @private @property {number} lastIndex   - index to add the next incoming value
  */
 class Queue {
   #storage;
@@ -19,7 +19,6 @@ class Queue {
 
   /*
    * Creates a Queue, initialises private properties
-   *
    * @param {any []} array - The array to initiate into a queue
    */
   constructor(arr = []) {
