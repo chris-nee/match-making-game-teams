@@ -75,7 +75,6 @@ class MatchMaker {
         throw TypeError(numTypeErrMsg());
       }
       if (!this.isValidTeamSize(teamSize)) {
-        throw Error(invalidTeamSizeErrMsg(this.#minTeamSize, this.#maxTeamSize));
         throw Error(
           invalidTeamSizeErrMsg(this.#minTeamSize, this.#maxTeamSize)
         );
