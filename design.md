@@ -189,12 +189,13 @@ If possible, we would like the system to get smarter and do more accurate matche
 #### Command line interaction tool
     - run `npm run start-interactive`
     - Select initial command
-        - 1 to add players
+        - Add new player
             - When a player is added, log info
-        - 2 to find match ( input team size )
+        - Find match ( input team size )
             - When a match is formed, print out match details
-        - 3 to mass add players ( json file location )
+        - Mass add players ( json file location )
             - log how many players were added
+        - Change the metrics which the match maker uses when making teams
 
 #### Configuration
 
