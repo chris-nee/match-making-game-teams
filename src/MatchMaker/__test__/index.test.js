@@ -64,12 +64,11 @@ describe("MatchMaker Singleton", () => {
     expect(MatchMaker.isValidTeamSize(11)).toBe(false);
   });
 
-  test("Methods", () => {
+  test("Methods - enterMatchMaking", () => {
     expect(MatchMaker.getNumOfPlayersInQueue()).toBe(0);
     expect(MatchMaker.getPlayers()).toEqual([]);
 
-    players.forEach((player) => {
-      const { name, wins, losses } = player;
+    players.forEach(({ name, wins, losses }) => {
       MatchMaker.enterMatchMaking(new Player(name, wins, losses));
     });
     expect(MatchMaker.getNumOfPlayersInQueue()).toBe(players.length);
