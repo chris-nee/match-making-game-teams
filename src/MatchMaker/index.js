@@ -3,6 +3,7 @@ import {
   invalidTeamSizeErrMsg,
   notEnoughPlayersErrMsg,
   invalidTeamSizeRangeErrMsg,
+  invalidMinTeamSizeErrMsg,
 } from "./errMsgs.js";
 import { Match } from "#entities/index.js";
 import { Queue } from "#utils/index.js";
@@ -33,6 +34,7 @@ class MatchMaker {
 
   setMinMaxTeamSize(min, max) {
     if (!this.isNum(min) || !this.isNum(max)) throw TypeError(numTypeErrMsg());
+    if (min <= 0) throw Error(invalidMinTeamSizeErrMsg());
     if (min > max) throw Error(invalidTeamSizeRangeErrMsg());
     this.#minTeamSize = min;
     this.#maxTeamSize = max;
