@@ -50,7 +50,7 @@ const players = [
   },
 ];
 
-describe("MatchMaker Singleton", () => {
+describe("MatchMaker", () => {
   test("Static", () => {
     expect(MatchMaker.isNum(1)).toBe(true);
     expect(MatchMaker.isNum("1")).toBe(false);
