@@ -9,3 +9,7 @@ export function invalidTeamSizeErrMsg(min, max) {
 export function notEnoughPlayersErrMsg(diff) {
   return `Not enough players, ${diff} more players needed`;
 }
+
+export function invalidTeamSizeRangeErrMsg() {
+  return `Min team size must be smaller than max team size`;
+}

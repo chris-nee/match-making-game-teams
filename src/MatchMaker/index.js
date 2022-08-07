@@ -2,21 +2,39 @@ import {
   numTypeErrMsg,
   invalidTeamSizeErrMsg,
   notEnoughPlayersErrMsg,
+  invalidTeamSizeRangeErrMsg,
 } from "./errMsgs.js";
 import { Match } from "#entities/index.js";
 import { Queue } from "#utils/index.js";
 
-class MatchMaker {
-  minTeamSize = 1;
-  maxTeamSize = 10;
+const DefaultMinTeamSize = 1;
+const DefaultMaxTeamSize = 10;
 
+class MatchMaker {
   static isNum(value) {
     return +value === value;
   }
 
   constructor() {
+    this.minTeamSize = DefaultMinTeamSize;
+    this.maxTeamSize = DefaultMaxTeamSize;
     this.playersInQueue = new Queue();
     this.matches = [];
+  }
+
+  getMinTeamSize() {
+    return this.minTeamSize;
+  }
+
+  getMaxTeamSize() {
+    return this.maxTeamSize;
+  }
+
+  setMinMaxTeamSize(min, max) {
+    if (!isNum(min) || !isNum(max)) throw TypeError(numTypeErrMsg());
+    if (min > max) throw Error(invalidTeamSizeRangeErrMsg());
+    this.minTeamSize = min;
+    this.maxTeamSize = max;
   }
 
   isNum(value) {
