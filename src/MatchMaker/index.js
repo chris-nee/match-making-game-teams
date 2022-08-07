@@ -88,7 +88,6 @@ class MatchMaker {
       console.log(this.playersInQueue.getSize());
       const [team1, team2] = this.generateTeamPair(selectedPlayers);
       const match = new Match(team1, team2);
-      match.printMatchDetails();
       this.matches.push(match);
 
       return match;

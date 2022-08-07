@@ -37,13 +37,15 @@ class Player {
     return this.getWins() / this.getLosses();
   }
 
-  printPlayerStats() {
-    console.log("&&&");
-    console.log(`Player "${this.getName()}" Stats:`);
-    console.log(`Wins: "${this.getWins()}" `);
-    console.log(`Losses: "${this.getLosses()}" `);
-    console.log(`Wins/Losses Ratio: "${this.getWinLoseRatio()}" `);
-    console.log("&&&");
+  getPlayerStats() {
+    return `
+        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        Player ${this.getName()} Stats:
+            - Wins: ${this.getWins()}
+            - Losses: ${this.getLosses()}
+            - Wins/Losses Ratio: ${this.getWinLoseRatio()}
+        &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    `;
   }
 }
 

@@ -15,16 +15,18 @@ class Match {
     return this.#team2;
   }
 
-  printMatchDetails() {
-    console.log("=============");
-    console.log("*Match Formed*");
-    console.log("-------------");
-    console.log(" TEAM 1 :");
-    this.#team1.forEach((player) => player.printPlayerStats());
-    console.log("-------------");
-    console.log(" TEAM 2 :");
-    this.#team2.forEach((player) => player.printPlayerStats());
-    console.log("=============");
+  getMatchDetails() {
+    return `
+        ==========================
+        Match Formed
+        TEAM 1 :
+        ${this.#team1.map((player) => player.getPlayerStats()).join("/n")}
+        --------------------------
+
+        TEAM 2 :
+        ${this.#team2.map((player) => player.getPlayerStats()).join("/n")}
+        ==========================
+    `;
   }
 }
 
